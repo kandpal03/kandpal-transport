@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kandpal-backend-service
+  namespace: kandpal-transport
+spec:
+  type: ClusterIP
+  selector:
+    app: kandpal-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      
