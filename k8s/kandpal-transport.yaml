@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kandpal-transport
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kandpal-transport
+  template:
+    metadata:
+      labels:
+        app: kandpal-transport
+    spec:
+      containers:
+        - name: kandpal-transport
+          image: kandpal03/kandpal-transport:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kandpal-transport-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: kandpal-transport
+  ports:
+    - port: 80
+      targetPort: 5000
