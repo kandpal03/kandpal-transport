@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/api/health", (req, res) => {
   res.send("Kandpal Transport Backend is running...");
 });
 
@@ -167,7 +168,7 @@ app.get("/api/track/:trackingId", (req, res) => {
       trackingId: "KT1004",
       status: "Near Destination",
       currentLocation: "Rudrapur delivery hub",
-     estimatedDelivery: "45 minutes",
+      estimatedDelivery: "45 minutes",
       driverName: "Manoj Kandpal",
       truckNumber: "UK04KT7788",
       steps: trackingSteps,
@@ -198,6 +199,14 @@ app.get("/api/track/:trackingId", (req, res) => {
     success: true,
     data: trackingData,
   });
+});
+
+// Serve React frontend build from Docker public folder
+app.use(express.static(path.join(__dirname, "public")));
+
+// React fallback route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, () => {
