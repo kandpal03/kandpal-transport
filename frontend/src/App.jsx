@@ -42,7 +42,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/trucks")
+    fetch("/api/trucks")
       .then((res) => res.json())
       .then((data) => {
         setTrucks(data.data || []);
@@ -76,7 +76,7 @@ function App() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/inquiries", {
+      const response = await fetch("/api/inquiries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -121,9 +121,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/track/${trackingId}`
-      );
+      const response = await fetch(`/api/track/${trackingId}`);
 
       const result = await response.json();
 
@@ -205,30 +203,57 @@ function App() {
       return;
     }
 
-    setAdminError("Invalid admin email or password. Use admin@kandpal.com / admin123 for demo.");
+    setAdminError(
+      "Invalid admin email or password. Use admin@kandpal.com / admin123 for demo."
+    );
   };
 
   const renderNavbar = () => (
     <nav className="navbar">
-      <button className="logo logo-button" onClick={() => goToSiteSection("home")}>
+      <button
+        className="logo logo-button"
+        onClick={() => goToSiteSection("home")}
+      >
         <span className="logo-icon">K</span>
         <span>Kandpal</span>
         <small>Transport</small>
       </button>
 
       <ul className="nav-links">
-        <li><button onClick={() => goToSiteSection("home")}>Home</button></li>
-        <li><button onClick={() => goToSiteSection("services")}>Services</button></li>
-        <li><button onClick={() => goToSiteSection("trucks")}>Trucks</button></li>
-        <li><button onClick={() => goToSiteSection("calculator")}>Calculator</button></li>
-        <li><button onClick={() => goToSiteSection("tracking")}>Tracking</button></li>
-        <li><button onClick={() => goToSiteSection("pricing")}>Pricing</button></li>
-        <li><button onClick={() => goToSiteSection("about")}>About</button></li>
-        <li><button onClick={() => goToSiteSection("contact")}>Contact</button></li>
-        <li><button onClick={() => setView("admin")}>Admin</button></li>
+        <li>
+          <button onClick={() => goToSiteSection("home")}>Home</button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("services")}>Services</button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("trucks")}>Trucks</button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("calculator")}>
+            Calculator
+          </button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("tracking")}>Tracking</button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("pricing")}>Pricing</button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("about")}>About</button>
+        </li>
+        <li>
+          <button onClick={() => goToSiteSection("contact")}>Contact</button>
+        </li>
+        <li>
+          <button onClick={() => setView("admin")}>Admin</button>
+        </li>
       </ul>
 
-      <button className="nav-btn" onClick={() => goToSiteSection("contact")}>Book Now →</button>
+      <button className="nav-btn" onClick={() => goToSiteSection("contact")}>
+        Book Now →
+      </button>
     </nav>
   );
 
@@ -240,7 +265,8 @@ function App() {
             <p className="section-tag">ADMIN PORTAL</p>
             <h2>Login to Dashboard</h2>
             <p className="admin-subtitle">
-              Demo login: <strong>admin@kandpal.com</strong> / <strong>admin123</strong>
+              Demo login: <strong>admin@kandpal.com</strong> /{" "}
+              <strong>admin123</strong>
             </p>
 
             <form onSubmit={handleAdminLogin} className="admin-form">
@@ -283,7 +309,10 @@ function App() {
               <p>Demo dashboard. Database connection will make these records live.</p>
             </div>
 
-            <button className="secondary-btn" onClick={() => setAdminLoggedIn(false)}>
+            <button
+              className="secondary-btn"
+              onClick={() => setAdminLoggedIn(false)}
+            >
               Logout
             </button>
           </div>
@@ -354,7 +383,6 @@ function App() {
 
   const renderSite = () => (
     <>
-      {/* Hero */}
       <section className="hero" id="home">
         <div className="hero-content">
           <h1>
@@ -363,18 +391,27 @@ function App() {
           </h1>
 
           <p>
-            Safe, fast and affordable transport solutions across India.
-            Your goods, our responsibility.
+            Safe, fast and affordable transport solutions across India. Your
+            goods, our responsibility.
           </p>
 
           <div className="hero-buttons">
-            <button className="primary-btn" onClick={() => goToSiteSection("contact")}>Book Now →</button>
-            <button className="secondary-btn" onClick={() => goToSiteSection("services")}>View Services →</button>
+            <button
+              className="primary-btn"
+              onClick={() => goToSiteSection("contact")}
+            >
+              Book Now →
+            </button>
+            <button
+              className="secondary-btn"
+              onClick={() => goToSiteSection("services")}
+            >
+              View Services →
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Services */}
       <section className="section" id="services">
         <p className="section-tag">OUR SERVICES</p>
         <h2>End-to-End Transport Solutions</h2>
@@ -406,14 +443,13 @@ function App() {
             <div className="icon">📍</div>
             <h3>Route Coverage</h3>
             <p>
-              Extensive network covering major cities and remote locations
-              across India.
+              Extensive network covering major cities and remote locations across
+              India.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Truck Options */}
       <section className="section" id="trucks">
         <p className="section-tag">TRUCK OPTIONS</p>
         <h2>Choose the Right Truck</h2>
@@ -444,7 +480,10 @@ function App() {
                   <span>₹{truck.pricePerKm}/km</span>
                 </div>
 
-                <button className="primary-btn truck-book-btn" onClick={() => goToSiteSection("contact")}>
+                <button
+                  className="primary-btn truck-book-btn"
+                  onClick={() => goToSiteSection("contact")}
+                >
                   Book This Truck →
                 </button>
               </div>
@@ -453,7 +492,6 @@ function App() {
         </div>
       </section>
 
-      {/* Price Calculator */}
       <section className="section" id="calculator">
         <p className="section-tag">PRICE CALCULATOR</p>
         <h2>Estimate Your Transport Cost</h2>
@@ -506,10 +544,18 @@ function App() {
               <h3>Estimated Cost</h3>
 
               <div className="price-result-grid">
-                <p><strong>Truck:</strong> {estimatedPrice.truckName}</p>
-                <p><strong>Rate:</strong> ₹{estimatedPrice.pricePerKm}/km</p>
-                <p><strong>Distance:</strong> {estimatedPrice.distance} km</p>
-                <p><strong>Weight:</strong> {estimatedPrice.weight}</p>
+                <p>
+                  <strong>Truck:</strong> {estimatedPrice.truckName}
+                </p>
+                <p>
+                  <strong>Rate:</strong> ₹{estimatedPrice.pricePerKm}/km
+                </p>
+                <p>
+                  <strong>Distance:</strong> {estimatedPrice.distance} km
+                </p>
+                <p>
+                  <strong>Weight:</strong> {estimatedPrice.weight}
+                </p>
               </div>
 
               <div className="total-price">
@@ -521,7 +567,10 @@ function App() {
                 load type and availability.
               </p>
 
-              <button className="primary-btn" onClick={() => goToSiteSection("contact")}>
+              <button
+                className="primary-btn"
+                onClick={() => goToSiteSection("contact")}
+              >
                 Book This Estimate →
               </button>
             </div>
@@ -529,7 +578,6 @@ function App() {
         </div>
       </section>
 
-      {/* Tracking */}
       <section className="section" id="tracking">
         <p className="section-tag">LIVE TRACKING</p>
         <h2>Track Your Shipment</h2>
@@ -542,7 +590,7 @@ function App() {
           <form className="tracking-form" onSubmit={handleTrack}>
             <input
               type="text"
-              placeholder="Enter Tracking ID e.g. KT2026001"
+              placeholder="Enter Tracking ID e.g. KT1001"
               value={trackingId}
               onChange={(e) => setTrackingId(e.target.value)}
             />
@@ -559,12 +607,26 @@ function App() {
               <h3>Tracking Details</h3>
 
               <div className="tracking-grid">
-                <p><strong>Tracking ID:</strong> {trackingData.trackingId}</p>
-                <p><strong>Status:</strong> {trackingData.status}</p>
-                <p><strong>Current Location:</strong> {trackingData.currentLocation}</p>
-                <p><strong>Estimated Delivery:</strong> {trackingData.estimatedDelivery}</p>
-                <p><strong>Driver:</strong> {trackingData.driverName}</p>
-                <p><strong>Truck Number:</strong> {trackingData.truckNumber}</p>
+                <p>
+                  <strong>Tracking ID:</strong> {trackingData.trackingId}
+                </p>
+                <p>
+                  <strong>Status:</strong> {trackingData.status}
+                </p>
+                <p>
+                  <strong>Current Location:</strong>{" "}
+                  {trackingData.currentLocation}
+                </p>
+                <p>
+                  <strong>Estimated Delivery:</strong>{" "}
+                  {trackingData.estimatedDelivery}
+                </p>
+                <p>
+                  <strong>Driver:</strong> {trackingData.driverName}
+                </p>
+                <p>
+                  <strong>Truck Number:</strong> {trackingData.truckNumber}
+                </p>
               </div>
 
               <div className="tracking-steps">
@@ -586,7 +648,6 @@ function App() {
         </div>
       </section>
 
-      {/* Pricing */}
       <section className="section" id="pricing">
         <p className="section-tag">PRICING</p>
         <h2>Transparent & Competitive Rates</h2>
@@ -633,7 +694,6 @@ function App() {
         </p>
       </section>
 
-      {/* About */}
       <section className="section" id="about">
         <p className="section-tag">WHY CHOOSE US</p>
         <h2>We Deliver More Than Just Goods</h2>
@@ -665,7 +725,6 @@ function App() {
         </div>
       </section>
 
-      {/* Contact */}
       <section className="contact-section" id="contact">
         <div className="contact-info">
           <h3>Get in Touch</h3>
@@ -809,7 +868,8 @@ function App() {
       </footer>
 
       <div className="copyright">
-        © 2026 Kandpal Transport. All Rights Reserved by Jagdish Kandpal & Jiya Bisht.
+        © 2026 Kandpal Transport. All Rights Reserved by Jagdish Kandpal & Jiya
+        Bisht.
       </div>
     </div>
   );
