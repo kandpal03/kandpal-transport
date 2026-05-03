@@ -204,8 +204,8 @@ app.get("/api/track/:trackingId", (req, res) => {
 // Serve React frontend build from Docker public folder
 app.use(express.static(path.join(__dirname, "public")));
 
-// React fallback route
-app.get("*", (req, res) => {
+// React fallback route - Express v5 safe
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
