@@ -97,7 +97,7 @@ pipeline {
         }
 
         failure {
-            echo 'Pipeline failed. Failed stage ke logs check karo.'
+            echo 'Pipeline failed.
         }
 
         always {
